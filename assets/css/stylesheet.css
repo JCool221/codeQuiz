@@ -1,0 +1,20 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    font-size: large;
+    align-items: center;
+}
+
+main{
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    box-sizing: content-box;
+    width: 350px
+}
