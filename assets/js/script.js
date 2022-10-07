@@ -7,17 +7,21 @@ function countdown () {
     var timerInterval= setInterval(function() {
         secondsLeft--;
         timerEl.textContent = "timer: " + secondsLeft;
-
+        
         if(secondsLeft === 0 ) {
             clearInterval(timerInterval);
-            testing123();
+            timesUp();
         }
     }, 1000);
 }
 // store and recover high scores
 // create questions
 
-
+// timer is at zero
+function timesUp() {
+    displayEl.textContent = 'Try again?';
+    
+}
 // write something to the text display box
 displayEl.textContent = 'Try to answer the following code related questions withihn the time limit. keep in mind that incorrect answers will penalize your scoretime by ten seconds!';
 
@@ -32,4 +36,5 @@ function testing123() {
 function screenTest() {
     countdown();
     displayEl.textContent = 'testing';
+    startButton.style.visibility = "hidden";
 }
