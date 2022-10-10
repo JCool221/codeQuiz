@@ -4,7 +4,6 @@ var timerEl = $('#timer');
 var buttonBox = $('#buttons');
 var highScores = $('#highScores');
 var boxH1 = $('#boxH1');
-// var selection = ('');
 boxH1.attr('data-test', 'test data');
 
 // create start button
@@ -13,8 +12,11 @@ startButton.addClass('start-btn');
 startButton.text('start');
 buttonBox.append(startButton);
 
-
-
+// divs to store answer trys
+var keyTest = $('<div>');
+keyTest.addClass('keyTest');
+var answerKey = $('<div>');
+answerKey.addClass('answerKey');
 
 // add timer
 function countdown () {
@@ -48,15 +50,21 @@ function addNewScore() {
 }
 
 // check for correctness
-function correct () {
-    
-}
+buttonBox.on("click", '.answer-button', function  (event) {
+    keyTest.text($(event.target).attr('data-answer'));
+   if (keyTest.text() === answerKey.text()) {
+    console.log('correct');
+   } else {
+    console.log('incorrect');
+   }
+});
 
 // create questions
 // question one
 function questionOne () {
     boxH1.text('Question 1');
     displayEl.text('What does HTML stand for')
+    answerKey.text('A Hyper Text Markup Language');
     var answers = [
         'A Hyper Text Markup Language',
         'B Hot Mail',
@@ -64,14 +72,184 @@ function questionOne () {
     ];     
     for (var i = 0; i < answers.length; i++) {
         var answerButton = $('<button>');
-        answerButton.addClass(answers[i]);
+        answerButton.addClass('answer-button');
         answerButton.attr('data-answer', answers[i]);
         answerButton.text(answers[i]);
         buttonBox.append(answerButton);
     }
 }
-    
-    
+   
+// question two
+function questionTwo () {
+    boxH1.text('Question 2');
+    displayEl.text('How many tags are in a regular element?')
+    answerKey.text('A 2');
+    var answers = [
+        'A 2',
+        'B 1',
+        'C 3',
+    ];     
+    for (var i = 0; i < answers.length; i++) {
+        var answerButton = $('<button>');
+        answerButton.addClass('answer-button');
+        answerButton.attr('data-answer', answers[i]);
+        answerButton.text(answers[i]);
+        buttonBox.append(answerButton);
+    }
+}
+
+// question three
+function questionThree () {
+    boxH1.text('Question 3');
+    displayEl.text('What is the differnece between an opening tagand a closing tag??')
+    answerKey.text('B Closing tag has a / in front');
+    var answers = [
+        'A Opening tag has a / in front',
+        'B Closing tag has a / in front',
+        'C There is no difference',
+    ];     
+    for (var i = 0; i < answers.length; i++) {
+        var answerButton = $('<button>');
+        answerButton.addClass('answer-button');
+        answerButton.attr('data-answer', answers[i]);
+        answerButton.text(answers[i]);
+        buttonBox.append(answerButton);
+    }
+}
+
+// question four
+function questionFour () {
+    boxH1.text('Question 4');
+    displayEl.text('<body> Is this an opening or a closing tag?')
+    answerKey.text('C Opening');
+    var answers = [
+        'A That is not a valid tag',
+        'B Closing',
+        'C Opening',
+    ];     
+    for (var i = 0; i < answers.length; i++) {
+        var answerButton = $('<button>');
+        answerButton.addClass('answer-button');
+        answerButton.attr('data-answer', answers[i]);
+        answerButton.text(answers[i]);
+        buttonBox.append(answerButton);
+    }
+}
+  
+// question five
+function questionFive () {
+    boxH1.text('Question 5');
+    displayEl.text('Where is the meta tag only found?')
+    answerKey.text('B The Home page');
+    var answers = [
+        'A The last page',
+        'B The Home page',
+        'C The second page',
+    ];     
+    for (var i = 0; i < answers.length; i++) {
+        var answerButton = $('<button>');
+        answerButton.addClass('answer-button');
+        answerButton.attr('data-answer', answers[i]);
+        answerButton.text(answers[i]);
+        buttonBox.append(answerButton);
+    }
+}
+
+// question six
+function questionSix () {
+    boxH1.text('Question 6');
+    displayEl.text('What is an element that does not have a closing tag called?')
+    answerKey.text('A Empty Element');
+    var answers = [
+        'A Empty Element',
+        'B Tagged Element',
+        'C Closed ELement',
+    ];     
+    for (var i = 0; i < answers.length; i++) {
+        var answerButton = $('<button>');
+        answerButton.addClass('answer-button');
+        answerButton.attr('data-answer', answers[i]);
+        answerButton.text(answers[i]);
+        buttonBox.append(answerButton);
+    }
+}
+
+// question seven
+function questionSeven () {
+    boxH1.text('Question 7');
+    displayEl.text('What should values always be enclosed in?')
+    answerKey.text('C Quotation marks');
+    var answers = [
+        'A Commas',
+        'B Parenthesis',
+        'C Quotation marks',
+    ];     
+    for (var i = 0; i < answers.length; i++) {
+        var answerButton = $('<button>');
+        answerButton.addClass('answer-button');
+        answerButton.attr('data-answer', answers[i]);
+        answerButton.text(answers[i]);
+        buttonBox.append(answerButton);
+    }
+}
+
+// question eight
+function questionEight () {
+    boxH1.text('Question 8');
+    displayEl.text('what is an example of an empty element?')
+    answerKey.text('B <img>');
+    var answers = [
+        'A <a>',
+        'B <img>',
+        'C <div>',
+    ];     
+    for (var i = 0; i < answers.length; i++) {
+        var answerButton = $('<button>');
+        answerButton.addClass('answer-button');
+        answerButton.attr('data-answer', answers[i]);
+        answerButton.text(answers[i]);
+        buttonBox.append(answerButton);
+    }
+}
+
+// question nine
+function questionNine () {
+    boxH1.text('Question ');
+    displayEl.text('What is always a welcome page, and explains the purpose or topic of the site?')
+    answerKey.text('B Homepage');
+    var answers = [
+        'A Table of Contents',
+        'B Homepage',
+        'C ReadMe',
+    ];     
+    for (var i = 0; i < answers.length; i++) {
+        var answerButton = $('<button>');
+        answerButton.addClass('answer-button');
+        answerButton.attr('data-answer', answers[i]);
+        answerButton.text(answers[i]);
+        buttonBox.append(answerButton);
+    }
+}
+
+// question ten
+function questionTen () {
+    boxH1.text('Question 10');
+    displayEl.text('What does View Source do?')
+    answerKey.text('A Brings up a note pad with the HTML code already used for the site');
+    var answers = [
+        'A Brings up a note pad with the HTML code already used for the site',
+        'B Brings up an empty site',
+        'C Returns you to the homepage',
+    ];     
+    for (var i = 0; i < answers.length; i++) {
+        var answerButton = $('<button>');
+        answerButton.addClass('answer-button');
+        answerButton.attr('data-answer', answers[i]);
+        answerButton.text(answers[i]);
+        buttonBox.append(answerButton);
+    }
+}
+
     // empty the buttonBox and create the question
 function RenderQuestions() {
     $(buttonBox).children().remove();
@@ -99,7 +277,6 @@ highScores.on('click', addScore);
 // delegate event listener to the buttonbox
 buttonBox.on("click", '.reset-button', refresh);
 buttonBox.on('click', '.score-button', addNewScore);
-buttonBox.on("click", '.answer-button', correct);
 
 // reload the page (for reset button)
 function refresh () {
