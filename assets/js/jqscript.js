@@ -14,8 +14,6 @@ startButton.text('start');
 buttonBox.append(startButton);
 
 
-
-
 // add timer
 function countdown () {
     var timerInterval= setInterval(function() {
@@ -48,8 +46,10 @@ function addNewScore() {
 }
 
 // check for correctness
-function correct () {
-    
+function correct (event) {
+    var keyTest = $('<div>');
+    keyTest.addClass('keyTest');
+    keyTest.text($(event.target).attr('data-answer'));
 }
 
 // create questions
@@ -57,6 +57,9 @@ function correct () {
 function questionOne () {
     boxH1.text('Question 1');
     displayEl.text('What does HTML stand for')
+    var answerKey = $('<div>');
+    answerKey.addClass('answerKey');
+    answerKey.text('a Hyper Text Markup Language');
     var answers = [
         'A Hyper Text Markup Language',
         'B Hot Mail',
@@ -64,7 +67,7 @@ function questionOne () {
     ];     
     for (var i = 0; i < answers.length; i++) {
         var answerButton = $('<button>');
-        answerButton.addClass(answers[i]);
+        answerButton.addClass('answer-button');
         answerButton.attr('data-answer', answers[i]);
         answerButton.text(answers[i]);
         buttonBox.append(answerButton);
