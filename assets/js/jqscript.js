@@ -4,7 +4,6 @@ var timerEl = $('#timer');
 var buttonBox = $('#buttons');
 var highScores = $('#highScores');
 var boxH1 = $('#boxH1');
-// var selection = ('');
 boxH1.attr('data-test', 'test data');
 
 // create start button
@@ -53,7 +52,6 @@ function addNewScore() {
 // check for correctness
 buttonBox.on("click", '.answer-button', function  (event) {
     keyTest.text($(event.target).attr('data-answer'));
-    answerKey.text($(event.target).attr('data-answer'));
    if (keyTest.text() === answerKey.text()) {
     console.log('correct');
    } else {
