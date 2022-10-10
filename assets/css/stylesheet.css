@@ -21,6 +21,10 @@ main{
 }
 
 button {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     background-color:  blueviolet;
     color: white;
     font-family: monospace;
