@@ -49,19 +49,11 @@ function addNewScore() {
     console.log('This does not do anything yet');
 }
 
-// check for correctness
-buttonBox.on("click", '.answer-button', function  (event) {
-    keyTest.text($(event.target).attr('data-answer'));
-   if (keyTest.text() === answerKey.text()) {
-    console.log('correct');
-   } else {
-    console.log('incorrect');
-   }
-});
 
 // create questions
 // question one
 function questionOne () {
+    $(buttonBox).children().remove();
     boxH1.text('Question 1');
     displayEl.text('What does HTML stand for')
     answerKey.text('A Hyper Text Markup Language');
@@ -78,9 +70,22 @@ function questionOne () {
         buttonBox.append(answerButton);
     }
 }
-   
+// check for correctness
+buttonBox.on("click", '.answer-button', function  (event) {
+    keyTest.text($(event.target).attr('data-answer'));
+   if (keyTest.text() === answerKey.text()) {
+    console.log('correct');
+    questionTwo();
+   } else {
+    console.log('incorrect');
+    questionTwo();
+   }
+});
+
+
 // question two
 function questionTwo () {
+    $(buttonBox).children().remove();
     boxH1.text('Question 2');
     displayEl.text('How many tags are in a regular element?')
     answerKey.text('A 2');
@@ -100,6 +105,7 @@ function questionTwo () {
 
 // question three
 function questionThree () {
+    $(buttonBox).children().remove();
     boxH1.text('Question 3');
     displayEl.text('What is the differnece between an opening tagand a closing tag??')
     answerKey.text('B Closing tag has a / in front');
@@ -119,6 +125,7 @@ function questionThree () {
 
 // question four
 function questionFour () {
+    $(buttonBox).children().remove();
     boxH1.text('Question 4');
     displayEl.text('<body> Is this an opening or a closing tag?')
     answerKey.text('C Opening');
@@ -135,9 +142,10 @@ function questionFour () {
         buttonBox.append(answerButton);
     }
 }
-  
+
 // question five
 function questionFive () {
+    $(buttonBox).children().remove();
     boxH1.text('Question 5');
     displayEl.text('Where is the meta tag only found?')
     answerKey.text('B The Home page');
@@ -157,6 +165,7 @@ function questionFive () {
 
 // question six
 function questionSix () {
+    $(buttonBox).children().remove();
     boxH1.text('Question 6');
     displayEl.text('What is an element that does not have a closing tag called?')
     answerKey.text('A Empty Element');
@@ -176,6 +185,7 @@ function questionSix () {
 
 // question seven
 function questionSeven () {
+    $(buttonBox).children().remove();
     boxH1.text('Question 7');
     displayEl.text('What should values always be enclosed in?')
     answerKey.text('C Quotation marks');
@@ -195,6 +205,7 @@ function questionSeven () {
 
 // question eight
 function questionEight () {
+    $(buttonBox).children().remove();
     boxH1.text('Question 8');
     displayEl.text('what is an example of an empty element?')
     answerKey.text('B <img>');
@@ -214,6 +225,7 @@ function questionEight () {
 
 // question nine
 function questionNine () {
+    $(buttonBox).children().remove();
     boxH1.text('Question ');
     displayEl.text('What is always a welcome page, and explains the purpose or topic of the site?')
     answerKey.text('B Homepage');
@@ -233,6 +245,7 @@ function questionNine () {
 
 // question ten
 function questionTen () {
+    
     boxH1.text('Question 10');
     displayEl.text('What does View Source do?')
     answerKey.text('A Brings up a note pad with the HTML code already used for the site');
@@ -250,11 +263,32 @@ function questionTen () {
     }
 }
 
-    // empty the buttonBox and create the question
+// empty the buttonBox and create the question
 function RenderQuestions() {
     $(buttonBox).children().remove();
     questionOne();
 }
+
+
+// // advance through the questions
+// var allQestions = [
+//     questionOne,
+//     questionTwo,
+//     questionThree,
+//     questionFour,
+//     questionFive,
+//     questionSix,
+//     questionSeven,
+//     questionEight,
+//     questionNine,
+//     questionTen,
+// ];
+// let currentIndex = 0;
+
+// function advanceQuestion(i) {
+
+// }
+
 
 
 // timer is at zero
@@ -282,6 +316,7 @@ buttonBox.on('click', '.score-button', addNewScore);
 function refresh () {
     location.reload();
 }
+
 // test functions delete before deployment
 function testing123() {
     console.log('test');
