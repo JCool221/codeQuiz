@@ -49,17 +49,6 @@ function addNewScore() {
     console.log('This does not do anything yet');
 }
 
-// check for correctness
-buttonBox.on("click", '.answer-button', function  (event) {
-    keyTest.text($(event.target).attr('data-answer'));
-   if (keyTest.text() === answerKey.text()) {
-    console.log('correct');
-    allQestions++;
-    RenderQuestions();
-   } else {
-    console.log('incorrect');
-   }
-});
 
 // create questions
 // question one
@@ -81,7 +70,19 @@ function questionOne () {
         buttonBox.append(answerButton);
     }
 }
-   
+// check for correctness
+buttonBox.on("click", '.answer-button', function  (event) {
+    keyTest.text($(event.target).attr('data-answer'));
+   if (keyTest.text() === answerKey.text()) {
+    console.log('correct');
+    questionTwo();
+   } else {
+    console.log('incorrect');
+    questionTwo();
+   }
+});
+
+
 // question two
 function questionTwo () {
     $(buttonBox).children().remove();
@@ -141,7 +142,7 @@ function questionFour () {
         buttonBox.append(answerButton);
     }
 }
-  
+
 // question five
 function questionFive () {
     $(buttonBox).children().remove();
@@ -262,27 +263,32 @@ function questionTen () {
     }
 }
 
-    // empty the buttonBox and create the question
+// empty the buttonBox and create the question
 function RenderQuestions() {
     $(buttonBox).children().remove();
-    currentQestion();
+    questionOne();
 }
 
-// advance through the questions
-var allQestions = [
-    questionOne,
-    questionTwo,
-    questionThree,
-    questionFour,
-    questionFive,
-    questionSix,
-    questionSeven,
-    questionEight,
-    questionNine,
-    questionTen,
-];
 
-var currentQestion = allQestions.at(0);
+// // advance through the questions
+// var allQestions = [
+//     questionOne,
+//     questionTwo,
+//     questionThree,
+//     questionFour,
+//     questionFive,
+//     questionSix,
+//     questionSeven,
+//     questionEight,
+//     questionNine,
+//     questionTen,
+// ];
+// let currentIndex = 0;
+
+// function advanceQuestion(i) {
+
+// }
+
 
 
 // timer is at zero
@@ -310,6 +316,7 @@ buttonBox.on('click', '.score-button', addNewScore);
 function refresh () {
     location.reload();
 }
+
 // test functions delete before deployment
 function testing123() {
     console.log('test');
