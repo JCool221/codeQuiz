@@ -54,6 +54,8 @@ buttonBox.on("click", '.answer-button', function  (event) {
     keyTest.text($(event.target).attr('data-answer'));
    if (keyTest.text() === answerKey.text()) {
     console.log('correct');
+    allQestions++;
+    RenderQuestions();
    } else {
     console.log('incorrect');
    }
@@ -263,7 +265,7 @@ function questionTen () {
     // empty the buttonBox and create the question
 function RenderQuestions() {
     $(buttonBox).children().remove();
-    questionOne();
+    currentQestion();
 }
 
 // advance through the questions
@@ -282,9 +284,7 @@ var allQestions = [
 
 var currentQestion = allQestions.at(0);
 
-function advanceQuestion () {
-    currentQestion++;
-}
+
 // timer is at zero
 function timesUp() {
     displayEl.text('Try again?');
