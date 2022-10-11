@@ -20,6 +20,9 @@ startButton.on('click', RenderQuestions);
 
 // event handler for view high scores
 highScores.on('click', addScore);
+function viewScores () {
+        
+}
 
 // divs to store answer trys
 var keyTest = $('<div>');
@@ -37,7 +40,6 @@ function correct () {
 // incorrect answer function
 function incorrect () {
     console.log('incorrect');
-    score--;
     secondsLeft -= 1;
     console.log(score);
 }
@@ -62,16 +64,20 @@ function addScore () {
     boxH1.text('Your score is ' + score);
     displayEl.text('Enter your initials');
     var initialsBox = $('<input>');
+    initialsBox.addClass('initials-box')
     displayEl.append(initialsBox);
     var scoreButton = $('<button>');
     scoreButton.addClass('score-button');
     scoreButton.text('Add your Score');
     buttonBox.append(scoreButton);
+    buttonBox.on("click", '.score-button', function () {
+        var initials = document.getElementsByClassName("initials-box")[0].value;
+        console.log(initials);
+        localStorage.setItem('score', initials + " " + score);
+        console.log(score);
+    })
 }
 
-function addNewScore() {
-
-}
 
 
 // create questions
@@ -403,7 +409,7 @@ function RenderQuestions() {
 
 // delegate event listener to the buttonbox
 buttonBox.on("click", '.reset-button', refresh);
-buttonBox.on('click', '.score-button', addNewScore);
+// buttonBox.on('click', '.score-button', addNewScore);
 
 // reload the page (for reset button)
 function refresh () {
