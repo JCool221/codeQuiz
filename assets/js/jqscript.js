@@ -62,6 +62,7 @@ buttonBox.on("click", '.answer-button', function  (event) {
 // create questions
 // question one
 function questionOne () {
+    $(buttonBox).children().remove();
     boxH1.text('Question 1');
     displayEl.text('What does HTML stand for')
     answerKey.text('A Hyper Text Markup Language');
@@ -81,6 +82,7 @@ function questionOne () {
    
 // question two
 function questionTwo () {
+    $(buttonBox).children().remove();
     boxH1.text('Question 2');
     displayEl.text('How many tags are in a regular element?')
     answerKey.text('A 2');
@@ -100,6 +102,7 @@ function questionTwo () {
 
 // question three
 function questionThree () {
+    $(buttonBox).children().remove();
     boxH1.text('Question 3');
     displayEl.text('What is the differnece between an opening tagand a closing tag??')
     answerKey.text('B Closing tag has a / in front');
@@ -119,6 +122,7 @@ function questionThree () {
 
 // question four
 function questionFour () {
+    $(buttonBox).children().remove();
     boxH1.text('Question 4');
     displayEl.text('<body> Is this an opening or a closing tag?')
     answerKey.text('C Opening');
@@ -138,6 +142,7 @@ function questionFour () {
   
 // question five
 function questionFive () {
+    $(buttonBox).children().remove();
     boxH1.text('Question 5');
     displayEl.text('Where is the meta tag only found?')
     answerKey.text('B The Home page');
@@ -157,6 +162,7 @@ function questionFive () {
 
 // question six
 function questionSix () {
+    $(buttonBox).children().remove();
     boxH1.text('Question 6');
     displayEl.text('What is an element that does not have a closing tag called?')
     answerKey.text('A Empty Element');
@@ -176,6 +182,7 @@ function questionSix () {
 
 // question seven
 function questionSeven () {
+    $(buttonBox).children().remove();
     boxH1.text('Question 7');
     displayEl.text('What should values always be enclosed in?')
     answerKey.text('C Quotation marks');
@@ -195,6 +202,7 @@ function questionSeven () {
 
 // question eight
 function questionEight () {
+    $(buttonBox).children().remove();
     boxH1.text('Question 8');
     displayEl.text('what is an example of an empty element?')
     answerKey.text('B <img>');
@@ -214,6 +222,7 @@ function questionEight () {
 
 // question nine
 function questionNine () {
+    $(buttonBox).children().remove();
     boxH1.text('Question ');
     displayEl.text('What is always a welcome page, and explains the purpose or topic of the site?')
     answerKey.text('B Homepage');
@@ -233,6 +242,7 @@ function questionNine () {
 
 // question ten
 function questionTen () {
+    
     boxH1.text('Question 10');
     displayEl.text('What does View Source do?')
     answerKey.text('A Brings up a note pad with the HTML code already used for the site');
@@ -256,7 +266,25 @@ function RenderQuestions() {
     questionOne();
 }
 
+// advance through the questions
+var allQestions = [
+    questionOne,
+    questionTwo,
+    questionThree,
+    questionFour,
+    questionFive,
+    questionSix,
+    questionSeven,
+    questionEight,
+    questionNine,
+    questionTen,
+];
 
+var currentQestion = allQestions.at(0);
+
+function advanceQuestion () {
+    currentQestion++;
+}
 // timer is at zero
 function timesUp() {
     displayEl.text('Try again?');
