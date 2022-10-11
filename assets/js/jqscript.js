@@ -12,21 +12,46 @@ startButton.addClass('start-btn');
 startButton.text('start');
 buttonBox.append(startButton);
 
+// write something to the text display box
+displayEl.text('Try to answer the following code related questions withihn the time limit. keep in mind that incorrect answers will penalize your scoretime by ten seconds!');
+
+// event handler for start button
+startButton.on('click', RenderQuestions);
+
+// event handler for view high scores
+highScores.on('click', addScore);
+
 // divs to store answer trys
 var keyTest = $('<div>');
 keyTest.addClass('keyTest');
 var answerKey = $('<div>');
 answerKey.addClass('answerKey');
+var score = 0
+
+// correct answer function
+function correct () {
+    console.log('correct');
+    score++;
+    console.log(score);
+}
+// incorrect answer function
+function incorrect () {
+    console.log('incorrect');
+    score--;
+    secondsLeft -= 1;
+    console.log(score);
+}
 
 // add timer
 function countdown () {
     var timerInterval= setInterval(function() {
         secondsLeft--;
         timerEl.text("Timer: " + secondsLeft);
-        
-        if(secondsLeft === 0 ) {
+        if(secondsLeft <= 0 ) {
             clearInterval(timerInterval);
-            timesUp();
+            
+            $(buttonBox).children().remove();
+            addScore();
         }
     }, 1000);
 }
@@ -34,8 +59,8 @@ function countdown () {
 // store and recover high scores
 function addScore () {
     startButton.remove();
-    boxH1.text('Enter your initials');
-    displayEl.text('');
+    boxH1.text('Your score is ' + score);
+    displayEl.text('Enter your initials');
     var initialsBox = $('<input>');
     displayEl.append(initialsBox);
     var scoreButton = $('<button>');
@@ -45,8 +70,7 @@ function addScore () {
 }
 
 function addNewScore() {
-    $(buttonBox).children().remove();
-    console.log('This does not do anything yet');
+
 }
 
 
@@ -69,15 +93,16 @@ function questionOne () {
         answerButton.text(answers[i]);
         buttonBox.append(answerButton);
     }
-}
+};
+
 // check for correctness
 buttonBox.on("click", '.answer-button', function  (event) {
     keyTest.text($(event.target).attr('data-answer'));
-   if (keyTest.text() === answerKey.text()) {
-    console.log('correct');
+    if (keyTest.text() === answerKey.text()) {
+    correct();
     questionTwo();
    } else {
-    console.log('incorrect');
+    incorrect();
     questionTwo();
    }
 });
@@ -96,12 +121,23 @@ function questionTwo () {
     ];     
     for (var i = 0; i < answers.length; i++) {
         var answerButton = $('<button>');
-        answerButton.addClass('answer-button');
+        answerButton.addClass('answer-button2');
         answerButton.attr('data-answer', answers[i]);
         answerButton.text(answers[i]);
         buttonBox.append(answerButton);
     }
 }
+// check for correctness
+buttonBox.on("click", '.answer-button2', function  (event) {
+    keyTest.text($(event.target).attr('data-answer'));
+   if (keyTest.text() === answerKey.text()) {
+    correct();
+    questionThree();
+   } else {
+    incorrect();
+    questionThree();
+   }
+});
 
 // question three
 function questionThree () {
@@ -116,12 +152,23 @@ function questionThree () {
     ];     
     for (var i = 0; i < answers.length; i++) {
         var answerButton = $('<button>');
-        answerButton.addClass('answer-button');
+        answerButton.addClass('answer-button3');
         answerButton.attr('data-answer', answers[i]);
         answerButton.text(answers[i]);
         buttonBox.append(answerButton);
     }
 }
+// check for correctness
+buttonBox.on("click", '.answer-button3', function  (event) {
+    keyTest.text($(event.target).attr('data-answer'));
+   if (keyTest.text() === answerKey.text()) {
+    correct();
+    questionFour();
+   } else {
+    incorrect();
+    questionFour();
+   }
+});
 
 // question four
 function questionFour () {
@@ -136,13 +183,23 @@ function questionFour () {
     ];     
     for (var i = 0; i < answers.length; i++) {
         var answerButton = $('<button>');
-        answerButton.addClass('answer-button');
+        answerButton.addClass('answer-button4');
         answerButton.attr('data-answer', answers[i]);
         answerButton.text(answers[i]);
         buttonBox.append(answerButton);
     }
 }
-
+// check for correctness
+buttonBox.on("click", '.answer-button4', function  (event) {
+    keyTest.text($(event.target).attr('data-answer'));
+   if (keyTest.text() === answerKey.text()) {
+    correct();
+    questionFive();
+   } else {
+    incorrect();
+    questionFive();
+   }
+});
 // question five
 function questionFive () {
     $(buttonBox).children().remove();
@@ -156,12 +213,23 @@ function questionFive () {
     ];     
     for (var i = 0; i < answers.length; i++) {
         var answerButton = $('<button>');
-        answerButton.addClass('answer-button');
+        answerButton.addClass('answer-button5');
         answerButton.attr('data-answer', answers[i]);
         answerButton.text(answers[i]);
         buttonBox.append(answerButton);
     }
 }
+// check for correctness
+buttonBox.on("click", '.answer-button5', function  (event) {
+    keyTest.text($(event.target).attr('data-answer'));
+   if (keyTest.text() === answerKey.text()) {
+    correct();
+    questionSix();
+   } else {
+    incorrect();
+    questionSix();
+   }
+});
 
 // question six
 function questionSix () {
@@ -176,12 +244,23 @@ function questionSix () {
     ];     
     for (var i = 0; i < answers.length; i++) {
         var answerButton = $('<button>');
-        answerButton.addClass('answer-button');
+        answerButton.addClass('answer-button6');
         answerButton.attr('data-answer', answers[i]);
         answerButton.text(answers[i]);
         buttonBox.append(answerButton);
     }
 }
+// check for correctness
+buttonBox.on("click", '.answer-button6', function  (event) {
+    keyTest.text($(event.target).attr('data-answer'));
+   if (keyTest.text() === answerKey.text()) {
+    correct();
+    questionSeven();
+   } else {
+    incorrect();
+    questionSeven();
+   }
+});
 
 // question seven
 function questionSeven () {
@@ -196,12 +275,23 @@ function questionSeven () {
     ];     
     for (var i = 0; i < answers.length; i++) {
         var answerButton = $('<button>');
-        answerButton.addClass('answer-button');
+        answerButton.addClass('answer-button7');
         answerButton.attr('data-answer', answers[i]);
         answerButton.text(answers[i]);
         buttonBox.append(answerButton);
     }
 }
+// check for correctness
+buttonBox.on("click", '.answer-button7', function  (event) {
+    keyTest.text($(event.target).attr('data-answer'));
+   if (keyTest.text() === answerKey.text()) {
+    correct();
+    questionEight();
+   } else {
+    incorrect();
+    questionEight();
+   }
+});
 
 // question eight
 function questionEight () {
@@ -216,12 +306,23 @@ function questionEight () {
     ];     
     for (var i = 0; i < answers.length; i++) {
         var answerButton = $('<button>');
-        answerButton.addClass('answer-button');
+        answerButton.addClass('answer-button8');
         answerButton.attr('data-answer', answers[i]);
         answerButton.text(answers[i]);
         buttonBox.append(answerButton);
     }
 }
+// check for correctness
+buttonBox.on("click", '.answer-button8', function  (event) {
+    keyTest.text($(event.target).attr('data-answer'));
+   if (keyTest.text() === answerKey.text()) {
+    correct();
+    questionNine();
+   } else {
+    incorrect();
+    questionNine();
+   }
+});
 
 // question nine
 function questionNine () {
@@ -236,16 +337,27 @@ function questionNine () {
     ];     
     for (var i = 0; i < answers.length; i++) {
         var answerButton = $('<button>');
-        answerButton.addClass('answer-button');
+        answerButton.addClass('answer-button9');
         answerButton.attr('data-answer', answers[i]);
         answerButton.text(answers[i]);
         buttonBox.append(answerButton);
     }
 }
+// check for correctness
+buttonBox.on("click", '.answer-button9', function  (event) {
+    keyTest.text($(event.target).attr('data-answer'));
+   if (keyTest.text() === answerKey.text()) {
+    correct();
+    questionTen();
+   } else {
+    incorrect();
+    questionTen();
+   }
+});
 
 // question ten
 function questionTen () {
-    
+    $(buttonBox).children().remove();
     boxH1.text('Question 10');
     displayEl.text('What does View Source do?')
     answerKey.text('A Brings up a note pad with the HTML code already used for the site');
@@ -256,57 +368,38 @@ function questionTen () {
     ];     
     for (var i = 0; i < answers.length; i++) {
         var answerButton = $('<button>');
-        answerButton.addClass('answer-button');
+        answerButton.addClass('answer-button10');
         answerButton.attr('data-answer', answers[i]);
         answerButton.text(answers[i]);
         buttonBox.append(answerButton);
     }
 }
+// check for correctness
+buttonBox.on("click", '.answer-button10', function  (event) {
+    keyTest.text($(event.target).attr('data-answer'));
+   if (keyTest.text() === answerKey.text()) {
+    correct();
+   } else {
+    incorrect();
+   }
+});
 
 // empty the buttonBox and create the question
 function RenderQuestions() {
     $(buttonBox).children().remove();
     questionOne();
+    countdown();
 }
-
-
-// // advance through the questions
-// var allQestions = [
-//     questionOne,
-//     questionTwo,
-//     questionThree,
-//     questionFour,
-//     questionFive,
-//     questionSix,
-//     questionSeven,
-//     questionEight,
-//     questionNine,
-//     questionTen,
-// ];
-// let currentIndex = 0;
-
-// function advanceQuestion(i) {
-
-// }
-
-
 
 // timer is at zero
-function timesUp() {
-    displayEl.text('Try again?');
-    var resetBtn = $('<button>');
-    resetBtn.addClass('reset-button');
-    resetBtn.text('reset');
-    buttonBox.append(resetBtn);
-}
-// write something to the text display box
-displayEl.text('Try to answer the following code related questions withihn the time limit. keep in mind that incorrect answers will penalize your scoretime by ten seconds!');
+// function timesUp() {
+//     displayEl.text('Your score ' + score + ' Try again?');
+//     var resetBtn = $('<button>');
+//     resetBtn.addClass('reset-button');
+//     resetBtn.text('reset');
+//     buttonBox.append(resetBtn);
+// }
 
-// event handler for start button
-startButton.on('click', RenderQuestions);
-
-// event handler for view high scores
-highScores.on('click', addScore);
 
 // delegate event listener to the buttonbox
 buttonBox.on("click", '.reset-button', refresh);
