@@ -18,14 +18,20 @@ keyTest.addClass('keyTest');
 var answerKey = $('<div>');
 answerKey.addClass('answerKey');
 
+// advance timer on incorrect answer
+function wrong () {
+    secondsLeft -= 1;
+}
+
 // add timer
 function countdown () {
     var timerInterval= setInterval(function() {
         secondsLeft--;
         timerEl.text("Timer: " + secondsLeft);
-        
         if(secondsLeft === 0 ) {
             clearInterval(timerInterval);
+            
+            $(buttonBox).children().remove();
             timesUp();
         }
     }, 1000);
@@ -78,6 +84,7 @@ buttonBox.on("click", '.answer-button', function  (event) {
     questionTwo();
    } else {
     console.log('incorrect');
+    wrong();
     questionTwo();
    }
 });
@@ -267,6 +274,7 @@ function questionTen () {
 function RenderQuestions() {
     $(buttonBox).children().remove();
     questionOne();
+    countdown();
 }
 
 
