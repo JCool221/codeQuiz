@@ -12,7 +12,7 @@ The user will be presented with a series of questions about HTML.  Correct answe
 
 ## Screenshot
 
-
+![img](./assets/img/codeQuiz.png)
 
 ## Credits
 By Josh Cooley
