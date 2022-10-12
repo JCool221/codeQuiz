@@ -4,7 +4,7 @@ This is a coding quiz in the style of what a new hire might experience, in this 
 
 ## URL
 
-coming soon
+https://jcool221.github.io/codeQuiz/
 
 ## Usage
 
