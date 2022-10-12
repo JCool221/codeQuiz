@@ -5,8 +5,10 @@ var buttonBox = $('#buttons');
 var highScores = $('#highScores');
 var boxH1 = $('#boxH1');
 var scoreLog =[];
-boxH1.attr('data-test', 'test data');
 var storedScore = localStorage.getItem('score');
+
+// add attributes to h1
+boxH1.attr('data-test', 'test data');
 
 // create start button
 var startButton= $('<button>');
@@ -30,6 +32,7 @@ function scoreBoardShow () {
     var scoreBoard = $('<ol>');
     scoreBoard.addClass('score-Board');
     var storedScore = localStorage.getItem('score');
+    var scoreBoardText = JSON.parse(storedScore);
     scoreBoard.text(storedScore);
     displayEl.append(scoreBoard);
 
@@ -85,7 +88,7 @@ function addScore () {
     buttonBox.append(scoreButton);
     buttonBox.on("click", '.score-button', function () {
         var initials = document.getElementsByClassName("initials-box")[0].value;
-        var newScore = (initials + " " + score);
+        var newScore = (score + " " + initials);
         var scoreString = JSON.stringify(newScore);
         scoreLog.push(scoreString);
         localStorage.setItem('score', scoreLog);
@@ -411,32 +414,10 @@ function RenderQuestions() {
     countdown();
 }
 
-// timer is at zero
-// function timesUp() {
-//     displayEl.text('Your score ' + score + ' Try again?');
-//     var resetBtn = $('<button>');
-//     resetBtn.addClass('reset-button');
-//     resetBtn.text('reset');
-//     buttonBox.append(resetBtn);
-// }
-
-
 // delegate event listener to the buttonbox
 buttonBox.on("click", '.reset-button', refresh);
-// buttonBox.on('click', '.score-button', addNewScore);
 
 // reload the page (for reset button)
 function refresh () {
     location.reload();
-}
-
-// test functions delete before deployment
-function testing123() {
-    console.log('test');
-}
-function screenTest() {
-    countdown();
-    boxH1.text('question');
-    displayEl.text('testing');
-    startButton.remove();
 }
