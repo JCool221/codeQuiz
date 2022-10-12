@@ -10,7 +10,9 @@ https://jcool221.github.io/codeQuiz/
 
 The user will be presented with a series of questions about HTML.  Correct answers will add to the score and incorrect answers will deduct from the remaining quiz.  After the quiz the user will be asked for initials to store their score with.  Clicking on 'View High Scores' will pull up a list of stored high scores and give the user the option to clear the history.
 
-screenshot
+## Screenshot
+
+
 
 ## Credits
 By Josh Cooley
