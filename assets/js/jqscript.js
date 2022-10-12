@@ -33,12 +33,10 @@ function scoreBoardShow () {
     scoreBoard.addClass('score-Board');
     var storedScore = localStorage.getItem('score');
     var scoreBoardText = JSON.parse(storedScore);
-    scoreBoard.text(storedScore);
+    scoreBoard.text(scoreBoardText);
     displayEl.append(scoreBoard);
 
 };
-
-
 
 // divs to store answer trys
 var keyTest = $('<div>');
