@@ -4,7 +4,9 @@ var timerEl = $('#timer');
 var buttonBox = $('#buttons');
 var highScores = $('#highScores');
 var boxH1 = $('#boxH1');
+var scoreLog =[];
 boxH1.attr('data-test', 'test data');
+var storedScore = localStorage.getItem('score');
 
 // create start button
 var startButton= $('<button>');
@@ -19,10 +21,21 @@ displayEl.text('Try to answer the following code related questions withihn the t
 startButton.on('click', RenderQuestions);
 
 // event handler for view high scores
-highScores.on('click', addScore);
-function viewScores () {
-        
-}
+highScores.on('click', scoreBoardShow);
+
+// draw the scoreboard
+function scoreBoardShow () {
+    displayEl.text('');
+    boxH1.text('High Scores');
+    var scoreBoard = $('<ol>');
+    scoreBoard.addClass('score-Board');
+    var storedScore = localStorage.getItem('score');
+    scoreBoard.text(storedScore);
+    displayEl.append(scoreBoard);
+
+};
+
+
 
 // divs to store answer trys
 var keyTest = $('<div>');
@@ -51,7 +64,7 @@ function countdown () {
         timerEl.text("Timer: " + secondsLeft);
         if(secondsLeft <= 0 ) {
             clearInterval(timerInterval);
-            
+            secondsLeft = 0;
             $(buttonBox).children().remove();
             addScore();
         }
@@ -72,12 +85,13 @@ function addScore () {
     buttonBox.append(scoreButton);
     buttonBox.on("click", '.score-button', function () {
         var initials = document.getElementsByClassName("initials-box")[0].value;
-        console.log(initials);
-        localStorage.setItem('score', initials + " " + score);
-        console.log(score);
+        var newScore = (initials + " " + score);
+        var scoreString = JSON.stringify(newScore);
+        scoreLog.push(scoreString);
+        localStorage.setItem('score', scoreLog);
+        console.log(scoreLog);
     })
 }
-
 
 
 // create questions
