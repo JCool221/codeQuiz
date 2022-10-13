@@ -19,7 +19,7 @@ buttonBox.append(startButton);
 
 // create a reset button
 function resetBtn() {
-    var resetButton= $('<button>');
+    var resetButton = $('<button>');
     resetButton.addClass('reset-button');
     resetButton.text('reset');
     buttonBox.append(resetButton);
@@ -41,6 +41,10 @@ highScores.on('click', scoreBoardShow);
 function scoreBoardShow () {
     $(buttonBox).children().remove();
     resetBtn();
+    var clearBtn = $('<button>');
+    clearBtn.addClass('clear-button');
+    clearBtn.text('Clear High Scores');
+    buttonBox.append(clearBtn);
     displayEl.text('');
     boxH1.text('High Scores');
     var scoreBoard = $('<ol>');
@@ -436,7 +440,11 @@ function RenderQuestions() {
 
 // delegate event listener to the buttonbox
 buttonBox.on("click", '.reset-button', refresh);
+buttonBox.on("click", '.clear-button', clearScores);
 
+function clearScores() {
+    localStorage.clear();
+}
 // reload the page (for reset button)
 function refresh () {
     location.reload();
