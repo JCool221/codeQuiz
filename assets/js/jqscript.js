@@ -6,6 +6,7 @@ var highScores = $('#highScores');
 var boxH1 = $('#boxH1');
 var scoreLog =[];
 var storedScore = localStorage.getItem('score');
+var broadcast = $('#broadcast');
 
 // add attributes to h1
 boxH1.attr('data-test', 'test data');
@@ -27,6 +28,10 @@ function resetBtn() {
 // write something to the text display box
 displayEl.text('Try to answer the following code related questions withihn the time limit. keep in mind that incorrect answers will penalize your scoretime by ten seconds!');
 
+function manageScore () {
+    var storedScore = localStorage.getItem('score');
+    var scoreBoardText = JSON.parse(storedScore);
+}
 // event handler for start button
 startButton.on('click', RenderQuestions);
 
@@ -49,10 +54,6 @@ function scoreBoardShow () {
         displayEl.text("No Scores saved yet.")
     }
 }
-function manageScore () {
-    var storedScore = localStorage.getItem('score');
-    var scoreBoardText = JSON.parse(storedScore);
-}
 // divs to store answer trys
 var keyTest = $('<div>');
 keyTest.addClass('keyTest');
@@ -62,15 +63,13 @@ var score = 0
 
 // correct answer function
 function correct () {
-    console.log('correct');
+    broadcast.text('Correct');
     score++;
-    console.log(score);
 }
 // incorrect answer function
 function incorrect () {
-    console.log('incorrect');
+    broadcast.text('Incorrect');
     secondsLeft -= 1;
-    console.log(score);
 }
 
 // timer
@@ -103,10 +102,14 @@ function addScore () {
     buttonBox.on("click", '.score-button', function () {
         var initials = document.getElementsByClassName("initials-box")[0].value;
         var newScore = (score + " " + initials);
-        manageScore();
-        scoreLog.concat(scoreBoardText);
-        scoreLog.concat(newScore);
-        var scoreString = JSON.stringify(newLog);
+        if (localStorage.length > 0) {           
+            manageScore();
+            scoreLog.concat(scoreBoardText);
+            scoreLog.concat(newScore);
+        } else {
+            scoreLog.concat(newScore);
+        }
+        var scoreString = JSON.stringify(scoreLog);
         localStorage.setItem('score', scoreString);
         window.alert("New Score Logged!");
         refresh();
