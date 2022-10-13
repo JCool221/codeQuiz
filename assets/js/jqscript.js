@@ -16,6 +16,14 @@ startButton.addClass('start-btn');
 startButton.text('start');
 buttonBox.append(startButton);
 
+// create a reset button
+function resetBtn() {
+    var resetButton= $('<button>');
+    resetButton.addClass('reset-button');
+    resetButton.text('reset');
+    buttonBox.append(resetButton);
+}
+
 // write something to the text display box
 displayEl.text('Try to answer the following code related questions withihn the time limit. keep in mind that incorrect answers will penalize your scoretime by ten seconds!');
 
@@ -27,17 +35,24 @@ highScores.on('click', scoreBoardShow);
 
 // draw the scoreboard
 function scoreBoardShow () {
+    $(buttonBox).children().remove();
+    resetBtn();
     displayEl.text('');
     boxH1.text('High Scores');
     var scoreBoard = $('<ol>');
     scoreBoard.addClass('score-Board');
+    if (localStorage.length > 0) {
+        manageScore();
+        scoreBoard.text(scoreBoardText);
+        displayEl.append(scoreBoard);
+    } else {
+        displayEl.text("No Scores saved yet.")
+    }
+}
+function manageScore () {
     var storedScore = localStorage.getItem('score');
     var scoreBoardText = JSON.parse(storedScore);
-    scoreBoard.text(scoreBoardText);
-    displayEl.append(scoreBoard);
-
-};
-
+}
 // divs to store answer trys
 var keyTest = $('<div>');
 keyTest.addClass('keyTest');
@@ -58,21 +73,22 @@ function incorrect () {
     console.log(score);
 }
 
-// add timer
+// timer
 function countdown () {
     var timerInterval= setInterval(function() {
         secondsLeft--;
         timerEl.text("Timer: " + secondsLeft);
         if(secondsLeft <= 0 ) {
             clearInterval(timerInterval);
-            secondsLeft = 0;
             $(buttonBox).children().remove();
+            window.alert("Time's up!")
+            secondsLeft = 0;
             addScore();
         }
     }, 1000);
 }
 
-// store and recover high scores
+// store high scores
 function addScore () {
     startButton.remove();
     boxH1.text('Your score is ' + score);
@@ -87,10 +103,13 @@ function addScore () {
     buttonBox.on("click", '.score-button', function () {
         var initials = document.getElementsByClassName("initials-box")[0].value;
         var newScore = (score + " " + initials);
-        var scoreString = JSON.stringify(newScore);
-        scoreLog.push(scoreString);
-        localStorage.setItem('score', scoreLog);
-        console.log(scoreLog);
+        manageScore();
+        scoreLog.concat(scoreBoardText);
+        scoreLog.concat(newScore);
+        var scoreString = JSON.stringify(newLog);
+        localStorage.setItem('score', scoreString);
+        window.alert("New Score Logged!");
+        refresh();
     })
 }
 
