@@ -5,7 +5,7 @@ var buttonBox = $('#buttons');
 var highScores = $('#highScores');
 var boxH1 = $('#boxH1');
 var scoreLog =[];
-var storedScore = localStorage.getItem('score');
+var storedScore = JSON.parse(localStorage.getItem('score'));
 var broadcast = $('#broadcast');
 
 // add attributes to h1
@@ -29,8 +29,7 @@ function resetBtn() {
 displayEl.text('Try to answer the following code related questions withihn the time limit. keep in mind that incorrect answers will penalize your scoretime by ten seconds!');
 
 function manageScore () {
-    var storedScore = localStorage.getItem('score');
-    var scoreBoardText = JSON.parse(storedScore);
+    var storedScore = JSON.parse(localStorage.getItem('score'));
 }
 // event handler for start button
 startButton.on('click', RenderQuestions);
@@ -48,7 +47,7 @@ function scoreBoardShow () {
     scoreBoard.addClass('score-Board');
     if (localStorage.length > 0) {
         manageScore();
-        scoreBoard.text(scoreBoardText);
+        scoreBoard.text(storedScore);
         displayEl.append(scoreBoard);
     } else {
         displayEl.text("No Scores saved yet.")
@@ -80,8 +79,9 @@ function countdown () {
         if(secondsLeft <= 0 ) {
             clearInterval(timerInterval);
             $(buttonBox).children().remove();
-            window.alert("Time's up!")
-            secondsLeft = 0;
+            window.alert("Time's up!");
+            timerEl.text('Timer: 0');
+            broadcast.text('');
             addScore();
         }
     }, 1000);
@@ -104,10 +104,10 @@ function addScore () {
         var newScore = (score + " " + initials);
         if (localStorage.length > 0) {           
             manageScore();
-            scoreLog.concat(scoreBoardText);
-            scoreLog.concat(newScore);
+            scoreLog.push(storedScore);
+            scoreLog.push(newScore);
         } else {
-            scoreLog.concat(newScore);
+            scoreLog.push(newScore);
         }
         var scoreString = JSON.stringify(scoreLog);
         localStorage.setItem('score', scoreString);
