@@ -5,7 +5,8 @@ var buttonBox = $('#buttons');
 var highScores = $('#highScores');
 var boxH1 = $('#boxH1');
 var scoreLog =[];
-var storedScore = localStorage.getItem('score');
+var storedScore = JSON.parse(localStorage.getItem('score'));
+var broadcast = $('#broadcast');
 
 // add attributes to h1
 boxH1.attr('data-test', 'test data');
@@ -27,6 +28,9 @@ function resetBtn() {
 // write something to the text display box
 displayEl.text('Try to answer the following code related questions withihn the time limit. keep in mind that incorrect answers will penalize your scoretime by ten seconds!');
 
+function manageScore () {
+    var storedScore = JSON.parse(localStorage.getItem('score'));
+}
 // event handler for start button
 startButton.on('click', RenderQuestions);
 
@@ -43,15 +47,11 @@ function scoreBoardShow () {
     scoreBoard.addClass('score-Board');
     if (localStorage.length > 0) {
         manageScore();
-        scoreBoard.text(scoreBoardText);
+        scoreBoard.text(storedScore);
         displayEl.append(scoreBoard);
     } else {
         displayEl.text("No Scores saved yet.")
     }
-}
-function manageScore () {
-    var storedScore = localStorage.getItem('score');
-    var scoreBoardText = JSON.parse(storedScore);
 }
 // divs to store answer trys
 var keyTest = $('<div>');
@@ -62,15 +62,13 @@ var score = 0
 
 // correct answer function
 function correct () {
-    console.log('correct');
+    broadcast.text('Correct');
     score++;
-    console.log(score);
 }
 // incorrect answer function
 function incorrect () {
-    console.log('incorrect');
+    broadcast.text('Incorrect');
     secondsLeft -= 1;
-    console.log(score);
 }
 
 // timer
@@ -81,8 +79,9 @@ function countdown () {
         if(secondsLeft <= 0 ) {
             clearInterval(timerInterval);
             $(buttonBox).children().remove();
-            window.alert("Time's up!")
-            secondsLeft = 0;
+            window.alert("Time's up!");
+            timerEl.text('Timer: 0');
+            broadcast.text('');
             addScore();
         }
     }, 1000);
@@ -103,10 +102,14 @@ function addScore () {
     buttonBox.on("click", '.score-button', function () {
         var initials = document.getElementsByClassName("initials-box")[0].value;
         var newScore = (score + " " + initials);
-        manageScore();
-        scoreLog.concat(scoreBoardText);
-        scoreLog.concat(newScore);
-        var scoreString = JSON.stringify(newLog);
+        if (localStorage.length > 0) {           
+            manageScore();
+            scoreLog.push(storedScore);
+            scoreLog.push(newScore);
+        } else {
+            scoreLog.push(newScore);
+        }
+        var scoreString = JSON.stringify(scoreLog);
         localStorage.setItem('score', scoreString);
         window.alert("New Score Logged!");
         refresh();
